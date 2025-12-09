@@ -151,7 +151,8 @@
 
 
 
-**Part 2: Local Implementation:-**
+
+****Part 2: Local Implementation:-********
 ### 1. Frontend
 #### Upload PDF file 
   - **File Type Validation**: Checks extension (`.pdf`) and MIME type (`application/pdf`). Shows error "Only PDF files are allowed" if invalid.

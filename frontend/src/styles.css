@@ -32,11 +32,33 @@ body {
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 28px;
+  margin: 4px 0;
   font-weight: 800;
   letter-spacing: -0.5px;
   color: #0f172a;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.subhead {
+  margin: 4px 0 0 0;
+  color: #475569;
 }
 
 /* Top pill buttons (tabs) */
@@ -46,6 +68,26 @@ h1 {
   justify-content: center;
   gap: 12px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.list-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button.ghost {
+  background: transparent;
+  color: #2563eb;
+  box-shadow: none;
+  border: 1px solid #cbd5e1;
+  padding: 9px 12px;
+}
+
+button.ghost:hover:not(:disabled) {
+  background: #f1f5f9;
+  box-shadow: none;
 }
 
 .pill {
@@ -233,8 +275,90 @@ ul {
   font-size: 12px;
 }
 
+.chip-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.chip-secondary {
+  background: #ecfeff;
+  color: #0ea5e9;
+}
+
 .actions button {
   margin-left: 8px;
+}
+
+/* Responsive: mobile-friendly */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px auto 32px;
+    padding: 0 14px;
+  }
+
+  .header {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .top-banner {
+    justify-content: flex-start;
+  }
+
+  form.card,
+  .card {
+    padding: 14px;
+  }
+
+  .doc-row {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px 6px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .actions button {
+    margin-left: 0;
+    flex: 1;
+  }
+
+  .status {
+    font-size: 12px;
+    padding: 9px 10px;
+  }
+
+  .list-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .meta {
+    font-size: 11px;
+  }
 }
 
 /* Optional “chip” for file size or type */
@@ -247,4 +371,37 @@ ul {
   color: #4f46e5;
   font-size: 11px;
   font-weight: 600;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.mini-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eef2ff;
+  color: #4338ca;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid #c7d2fe;
+}
+
+.empty {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.muted {
+  color: #94a3b8;
+  margin: 4px 0 0 0;
 }

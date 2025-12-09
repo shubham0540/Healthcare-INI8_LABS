@@ -8,14 +8,18 @@ function App() {
   const [statusType, setStatusType] = useState('info'); // info | error | success
   const MAX_SIZE = 10 * 1024 * 1024; // 10 MB
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const loadDocuments = async () => {
+    setRefreshing(true);
     try {
       const data = await fetchDocuments();
       setDocuments(data);
     } catch (err) {
       setStatus(err.message);
+      setStatusType('error');
     }
+    setRefreshing(false);
   };
 
   useEffect(() => {
@@ -76,10 +80,17 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Patient Portal - Documents</h1>
-      <div className="top-banner">
-        <span className="pill">Secure PDF Storage</span>
-        <span className="pill">Fast Uploads</span>
+      <div className="header">
+        <div>
+          <p className="eyebrow">Healthcare Portal</p>
+          <h1>Patient Documents</h1>
+          <p className="subhead">Upload, manage, and download your medical PDFs securely.</p>
+        </div>
+        <div className="top-banner">
+          <span className="pill">Secure PDF Storage</span>
+          <span className="pill">Fast Uploads</span>
+          <span className="pill">Download & Delete</span>
+        </div>
       </div>
       <form onSubmit={onSubmit} className="card">
         <label htmlFor="file">Upload PDF</label>
@@ -95,16 +106,35 @@ function App() {
       {status && <div className={`status ${statusType}`}>{status}</div>}
 
       <div className="card">
-        <h2>Uploaded Documents</h2>
-        {documents.length === 0 && <p>No documents yet.</p>}
+        <div className="list-header">
+          <h2>Uploaded Documents</h2>
+          <div className="list-actions">
+            {refreshing && <span className="mini-badge">Refreshing...</span>}
+            <button
+              type="button"
+              className="ghost"
+              onClick={loadDocuments}
+              disabled={refreshing || loading}
+            >
+              Refresh
+            </button>
+          </div>
+        </div>
+        {documents.length === 0 && (
+          <div className="empty">
+            <p>No documents yet.</p>
+            <p className="muted">Upload your first PDF to see it here.</p>
+          </div>
+        )}
         <ul>
           {documents.map((doc) => (
             <li key={doc.id} className="doc-row">
               <div>
                 <strong>{doc.filename}</strong>
-                <span className="meta">
-                  {(doc.filesize / 1024).toFixed(1)} KB • {new Date(doc.createdAt).toLocaleString()}
-                </span>
+                <div className="chip-row">
+                  <span className="chip">{formatSize(doc.filesize)}</span>
+                  <span className="chip chip-secondary">{formatDate(doc.createdAt)}</span>
+                </div>
               </div>
               <div className="actions">
                 <button onClick={() => downloadDocument(doc.id)}>Download</button>
@@ -121,4 +151,19 @@ function App() {
 }
 
 export default App;
+
+function formatSize(bytes) {
+  if (!bytes && bytes !== 0) return '';
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function formatDate(value) {
+  try {
+    return new Date(value).toLocaleString();
+  } catch {
+    return '';
+  }
+}
 

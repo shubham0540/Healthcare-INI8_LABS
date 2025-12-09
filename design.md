@@ -1,5 +1,5 @@
 
-## Part 1: Design Document (Mandatory)
+**## Part 1: Design Document**
 
 ### 1) Tech Stack Choices
 **Q1. What frontend framework did you use and why?**
@@ -151,7 +151,8 @@
 
 
 
-Part 2: Local Implementation:-
+
+****Part 2: Local Implementation:-********
 ### 1. Frontend
 #### Upload PDF file 
   - **File Type Validation**: Checks extension (`.pdf`) and MIME type (`application/pdf`). Shows error "Only PDF files are allowed" if invalid.

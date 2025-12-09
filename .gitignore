@@ -1,0 +1,11 @@
+node_modules
+dist
+.idea
+.vscode
+target
+uploads
+frontend/.vite
+frontend/dist
+backend/uploads
+
+
